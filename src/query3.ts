@@ -14,6 +14,7 @@ export class Query3 {
         private readonly abi: any[],
         private readonly events: string[],
         private readonly provider: AlchemyProvider | InfuraProvider | RpcProvider | LogProvider,
+        private readonly startBlock: number = 0,
         private readonly parser: EventParser = new StandardEventParser(abi),
         private readonly store: IndexedDb | Store = new IndexedDb(),
     ) {
@@ -25,7 +26,7 @@ export class Query3 {
             for (const event of this.events) {
                 let startBlock = await this.store.getLastSync(event);
                 if (!startBlock) {
-                    startBlock = 0;
+                    startBlock = this.startBlock;
                 }
                 
                 const events: Observable<LogResponse> = await this.provider.getLogs(this.address, event, this.abi, startBlock);

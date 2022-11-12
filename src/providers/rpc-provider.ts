@@ -43,7 +43,7 @@ export class RpcProvider implements LogProvider {
         const events = await this.getRawLogs(address, topics, start, end);
         this.runningJobs -= 1;
         if (events.error) {
-            if (events.error.code === -32005) { // Rate exceed
+            if (events.error.code === -32005 || events.error.code === -32064) { // Rate exceed
                 const middle = Math.round((start + end) / 2);
                 this.readEventsRange(address, topics, start, middle, subscriber, lastBlockChecked);
                 this.readEventsRange(address, topics, middle + 1, end, subscriber, lastBlockChecked);

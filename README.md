@@ -9,7 +9,8 @@ const query3 = new Query3(
     erc20Address,
     erc20Abi,
     ['Transfer', 'Approve'],
-    new InfuraProvider('mainnet', infuraApiKey);
+    new InfuraProvider('mainnet', infuraApiKey),
+    startBlock
 );
 await query3.sync();
 const events = await query3.getEvents('Transfer');
@@ -23,7 +24,7 @@ const query3 = new Query3(
     erc20Address,
     erc20Abi,
     ['Transfer', 'Approve'],
-    new InfuraProvider('mainnet', infuraApiKey);
+    new InfuraProvider('mainnet', infuraApiKey)
 );
 await query3.sync();
 const limit = 100;
@@ -57,6 +58,7 @@ const query3 = new Query3(
     abi,
     ['Transfer'],
     new RpcProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'),
+    startBlock,
     new StandardEventParser(abi),
     new IndexedDb("IndexedDb")
 )
