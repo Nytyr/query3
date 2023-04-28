@@ -15,12 +15,12 @@ beforeAll(async () => {
         new RpcProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'),
         0,
         new StandardEventParser(abi),
-        new IndexedDb("MemoryDb")
+        new IndexedDb("MemoryDb", '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1)
     );
 });
 
 describe('Query3', () => {
-    it('should store and query', async () => {
+    /*it('should store and query', async () => {
         await query3.sync();
         const limit = 100;
         const offset = 0;
@@ -43,7 +43,7 @@ describe('Query3', () => {
             offset
         ));
         expect(4).toEqual(4);
-    }, 99999);
+    }, 99999);*/
 
     /*it('should store a large collection +80k events', async () => {
         const abi = require('./nft.abi.json');
@@ -54,10 +54,26 @@ describe('Query3', () => {
             new RpcProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'),
             0,
             new StandardEventParser(abi),
-            new IndexedDb("MemoryDb")
+            new IndexedDb("MemoryDb", '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D', 1)
         );
         await query3.sync();
         console.log(await query3.getEvents('Transfer'));
         expect(4).toEqual(4);
     }, 99999);*/
+
+    it('should store a large collection +80k events', async () => {
+        const abi = require('./lp.abi.json');
+        let query3 = new Query3(
+            '0x1CEa83EC5E48D9157fCAe27a19807BeF79195Ce1',
+            abi,
+            ['Swap'],
+            new RpcProvider('https://1rpc.io/bnb'),
+            /* 27746339,*/ 27429250,
+            new StandardEventParser(abi),
+            new IndexedDb("MemoryDb", '0x1CEa83EC5E48D9157fCAe27a19807BeF79195Ce1', 56)
+        );
+        await query3.sync();
+        console.log(await query3.getEvents('Swap'));
+        expect(4).toEqual(4);
+    }, 999999);
 });

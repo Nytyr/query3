@@ -6,8 +6,8 @@ export class IndexedDb implements Store {
 
     public db;
 
-    constructor(implementation: 'IndexedDb' | 'MemoryDb' = 'IndexedDb') {
-        this.db = new minimongo[implementation]({namespace: 'Query3'}, undefined, undefined);
+    constructor(implementation: 'IndexedDb' | 'MemoryDb' = 'IndexedDb', address, chainId) {
+        this.db = new minimongo[implementation]({namespace: 'Query3_'+address+'_'+chainId}, undefined, undefined);
         this.populateCollections();
     }
 

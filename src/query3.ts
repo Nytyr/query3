@@ -16,7 +16,7 @@ export class Query3 {
         private readonly provider: AlchemyProvider | InfuraProvider | RpcProvider | LogProvider,
         private readonly startBlock: number = 0,
         private readonly parser: EventParser = new StandardEventParser(abi),
-        private readonly store: IndexedDb | Store = new IndexedDb(),
+        private readonly store: IndexedDb | Store = new IndexedDb('IndexedDb', address, 1),
     ) {
     }
 
