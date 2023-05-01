@@ -25,7 +25,7 @@ export class Query3 {
             this.isSyncing = true;
             for (const event of this.events) {
                 let startBlock = await this.store.getLastSync(event);
-                if (!startBlock) {
+                if (!startBlock || this.startBlock > startBlock) {
                     startBlock = this.startBlock;
                 }
                 
