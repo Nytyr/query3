@@ -1,4 +1,4 @@
-import { IndexedDb, Store } from '../src/store';
+import { IndexedDb, SQLite, Store } from '../src/store';
 import { OrderBy, WhereCondition } from '../src/filters';
 
 let stores: Store[];
@@ -6,7 +6,8 @@ const events = ['Event1', 'Event2'];
 
 beforeAll(async () => {
     stores = [
-        new IndexedDb("MemoryDb", '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1)
+        new IndexedDb("MemoryDb", '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1),
+        new SQLite(SQLite.SQLiteMemory, '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1),
     ];
 });
 
@@ -31,13 +32,7 @@ describe('Query3 Store', () => {
                     return await store.getEvents(event, [], {field: 'created', strategy: 'ASC'}, 1000, 0);
                 }
 
-                try {
-                    await basicQuery();
-                    expect(true).toBe(false);
-                } catch (e) {
-                    expect(e).toStrictEqual(new Error('Event not found on db'));
-                }
-
+                expect(await basicQuery()).toStrictEqual([]);
                 await store.saveEvents(event, []);
                 expect(await basicQuery()).toStrictEqual([]);
                 
@@ -83,7 +78,7 @@ describe('Query3 Store', () => {
                 expect(eventsWithSort.length).toBe(4);
                 const sortedEventsData = [...eventsData].sort((a, b) => a.created < b.created ? 1 : -1);
                 expect(eventsWithSort).toEqual(sortedEventsData);
-                
+
                 const eventsWithWhereEq = await store.getEvents(event, [{key: 'name', value: 'foo', comparator: '='}], {field: 'created', strategy: 'ASC'}, 100, 0);
                 expect(eventsWithWhereEq.length).toBe(2);
                 expect(eventsWithWhereEq).toEqual([eventsData[0], eventsData[2]]);

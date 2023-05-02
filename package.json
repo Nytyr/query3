@@ -20,6 +20,7 @@
     "minimongo": "^6.12.6",
     "node-fetch": "^2.6.7",
     "rxjs": "^7.5.7",
+    "sqlite3": "^5.1.6",
     "web3": "^1.8.0"
   },
   "repository": {

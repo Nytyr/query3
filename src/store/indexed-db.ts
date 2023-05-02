@@ -33,7 +33,7 @@ export class IndexedDb implements Store {
 
     async getEvents(eventName: string, conditions: WhereCondition[], orderBy: OrderBy, limit: number, offset: number): Promise<any[]> {
         if (!this.db[eventName.toLowerCase()]) {
-            throw new Error('Event not found on db');
+            return [];
         }
         let sort = [];
         if (orderBy) {
