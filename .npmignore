@@ -1,6 +1,7 @@
 # source
 src
 tests
+demos
 
 index.ts
 package-lock.json

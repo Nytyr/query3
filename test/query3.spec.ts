@@ -61,7 +61,7 @@ describe('Query3', () => {
         expect(4).toEqual(4);
     }, 99999);*/
 
-    /*it('should store a large collection +80k events', async () => {
+    it('should store a large collection +80k events', async () => {
         const abi = require('./lp.abi.json');
         let query3 = new Query3(
             '0x1CEa83EC5E48D9157fCAe27a19807BeF79195Ce1',
@@ -75,5 +75,5 @@ describe('Query3', () => {
         await query3.sync();
         console.log(await query3.getEvents('Swap'));
         expect(4).toEqual(4);
-    }, 999999);*/
+    }, 999999);
 });

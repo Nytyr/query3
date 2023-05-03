@@ -1,8 +1,24 @@
-# Query3.js
+# 🔎 ⛓ Query3.js
+
+[![](https://badgen.net/npm/v/query3)](https://www.npmjs.com/package/query3) 
 
 Query3 is a javascript library for storing smart contract events locally and do complex queries, like sorting, conditions and more.
 
-## Example
+It features two storage implementations, IndexedDB for running the library on the browser and SQLite when running it server-side.
+
+## 🛠 Installation
+
+```bash
+npm install query3 --save
+```
+
+## ⭐️ Features
+* **Event syncing**: Stores events locally, continue the syncing where you paused.
+* **Multi chain**: Chain agnostinc. 
+* **Multiple storage implementations**: Use our IndexedDB, SQLite implementation or create your own one.
+* **Fast sync**
+
+## 👨‍🚀 Example
 
 ```ts
 const query3 = new Query3(
@@ -16,8 +32,9 @@ await query3.sync();
 const events = await query3.getEvents('Transfer');
 ```
 
+You can find more examples on the "demos" folder. 
 
-### Complex queries
+### 📖 Complex queries
 
 ```ts
 const query3 = new Query3(
@@ -50,7 +67,7 @@ const events = await query3.getEvents(
 ```
 
 
-### Full Config
+### ⚙️ Full Config
 
 ```ts
 const query3 = new Query3(
