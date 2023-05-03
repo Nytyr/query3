@@ -1,7 +1,7 @@
 import { Query3 } from '../src/query3';
 import { RpcProvider } from '../src/providers';
 import { StandardEventParser } from '../src/parsers';
-import { IndexedDb } from '../src/store';
+import { IndexedDb, SQLite } from '../src/store';
 import { OrderBy, WhereCondition } from '../src/filters';
 
 let query3: Query3;  
@@ -68,9 +68,10 @@ describe('Query3', () => {
             abi,
             ['Swap'],
             new RpcProvider('https://1rpc.io/bnb'),
-            27429250,
+            27891676, // 27429250,
             new StandardEventParser(abi),
             new IndexedDb("MemoryDb", '0x1CEa83EC5E48D9157fCAe27a19807BeF79195Ce1', 56)
+            // new SQLite('tmp/', '0x1CEa83EC5E48D9157fCAe27a19807BeF79195Ce1', 56),
         );
         await query3.sync();
         console.log(await query3.getEvents('Swap'));

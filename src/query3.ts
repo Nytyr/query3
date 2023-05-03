@@ -23,6 +23,7 @@ export class Query3 {
     async sync() {
         return new Promise<void>(async (resolve) => {
             this.isSyncing = true;
+            await this.store.init();
             for (const event of this.events) {
                 let startBlock = await this.store.getLastSync(event);
                 if (!startBlock || this.startBlock > startBlock) {

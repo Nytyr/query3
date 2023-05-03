@@ -1,6 +1,7 @@
 import { WhereCondition, OrderBy } from '../filters';
 
 export interface Store {
+    init(): Promise<void>;
     setLastSync(eventName: string, block: number): Promise<void>;
     getLastSync(eventName: string): Promise<number>;
     saveEvents(eventName: string, events: any[]): Promise<void>;

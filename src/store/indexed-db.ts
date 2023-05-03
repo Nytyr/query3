@@ -8,6 +8,9 @@ export class IndexedDb implements Store {
 
     constructor(implementation: 'IndexedDb' | 'MemoryDb' = 'IndexedDb', address, chainId) {
         this.db = new minimongo[implementation]({namespace: 'Query3_'+address+'_'+chainId}, undefined, undefined);
+    }
+
+    async init(): Promise<void> {
         this.populateCollections();
     }
 

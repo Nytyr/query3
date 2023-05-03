@@ -9,6 +9,9 @@ beforeAll(async () => {
         new IndexedDb("MemoryDb", '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1),
         new SQLite(SQLite.SQLiteMemory, '0x455F7Ef6D8BCfc35f9337e85aEe1B0600a59FabE', 1),
     ];
+    for (const store of stores) {
+        await store.init();
+    }
 });
 
 describe('Query3 Store', () => {

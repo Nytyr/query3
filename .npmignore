@@ -2,6 +2,7 @@
 src
 tests
 demos
+tmp
 
 index.ts
 package-lock.json
